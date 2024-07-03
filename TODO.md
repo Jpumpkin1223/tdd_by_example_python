@@ -7,3 +7,4 @@
 - [ ] hashCode()
 - [ ] Equal null
 - [ ] Equal object
+- [x] 5CHF * 2 = 10CHF
