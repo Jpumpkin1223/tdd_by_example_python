@@ -14,6 +14,7 @@ def test_franc_multiplication() -> None:
 
 
 def test_equality() -> None:
-    five: Dollor = Dollor(5)
-    assert five == Dollor(5)
-    assert not five == Dollor(6)
+    assert Dollor(5) == Dollor(5)
+    assert not Dollor(5) == Dollor(6)
+    assert Franc(5) == Franc(5)
+    assert not Franc(5) == Franc(6)
