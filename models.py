@@ -1,24 +1,23 @@
-class Dollor:
+class Money:
     def __init__(self, amount: int):
-        self.__amount = amount
+        self._amount = amount
 
+
+class Dollor(Money):
     def __eq__(self, other) -> bool:
-        if not isinstance(other, Dollor):
+        if not isinstance(other, Money):
             return False
-        return self.__amount == other.__amount
+        return self._amount == other._amount
 
     def times(self, multiplier: int) -> "Dollor":
-        return Dollor(self.__amount * multiplier)
+        return Dollor(self._amount * multiplier)
 
 
-class Franc:
-    def __init__(self, amount: int):
-        self.__amount = amount
-
+class Franc(Money):
     def __eq__(self, other) -> bool:
-        if not isinstance(other, Franc):
+        if not isinstance(other, Money):
             return False
-        return self.__amount == other.__amount
+        return self._amount == other._amount
 
     def times(self, multiplier: int) -> "Franc":
-        return Franc(self.__amount * multiplier)
+        return Franc(self._amount * multiplier)
