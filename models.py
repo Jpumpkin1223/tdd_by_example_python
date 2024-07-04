@@ -5,7 +5,8 @@ class Money:
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Money):
             return False
-        return self._amount == other._amount
+        print(type(self), type(other))
+        return self._amount == other._amount and type(self) == type(other)
 
 
 class Dollor(Money):
