@@ -1,12 +1,12 @@
-# from abc import ABCMeta, abstractmethod
+from abc import ABCMeta, abstractmethod
 
 
-class Money:
+class Money(metaclass=ABCMeta):
     def __init__(self, amount: int):
         self._amount = amount
 
     @classmethod
-    def dollar(cls, amount: int) -> "Dollar":
+    def dollar(cls, amount: int) -> "Money":
         return Dollar(amount)
 
     def __eq__(self, other: object) -> bool:
@@ -14,6 +14,10 @@ class Money:
             return False
         print(type(self), type(other))
         return self._amount == other._amount and type(self) == type(other)
+
+    @abstractmethod
+    def times(self, multiplier: int) -> "Money":
+        pass
 
 
 class Dollar(Money):
