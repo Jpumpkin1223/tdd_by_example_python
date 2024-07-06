@@ -10,5 +10,5 @@
 - [x] 5CHF * 2 = 10CHF
 - [ ] Dollar/Franc 중복
 - [x] 공용 equal
-- [ ] 공용 times
+- [x] 공용 times
 - [x] 화폐비교
