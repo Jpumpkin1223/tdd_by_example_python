@@ -2,16 +2,20 @@ from abc import ABCMeta, abstractmethod
 
 
 class Money(metaclass=ABCMeta):
-    def __init__(self, amount: int):
+    def __init__(self, amount: int, currency: str):
         self._amount = amount
+        self._currency = currency
+
+    def currency(self) -> str:
+        return self._currency
 
     @classmethod
     def dollar(cls, amount: int) -> "Money":
-        return Dollar(amount)
+        return Dollar(amount, "USD")
 
     @classmethod
     def franc(cls, amount: int) -> "Money":
-        return Franc(amount)
+        return Franc(amount, "CHF")
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Money):
@@ -23,22 +27,18 @@ class Money(metaclass=ABCMeta):
     def times(self, multiplier: int) -> "Money":
         pass
 
-    @abstractmethod
-    def currency(self) -> str:
-        pass
-
 
 class Dollar(Money):
-    def currency(self) -> str:
-        return "USD"
+    def __init__(self, amount: int, currency: str):
+        super().__init__(amount, currency)
 
     def times(self, multiplier: int) -> Money:
-        return Dollar(self._amount * multiplier)
+        return Money.dollar(self._amount * multiplier)
 
 
 class Franc(Money):
-    def currency(self) -> str:
-        return "CHF"
+    def __init__(self, amount: int, currency: str):
+        super().__init__(amount, currency)
 
     def times(self, multiplier: int) -> Money:
-        return Franc(self._amount * multiplier)
+        return Money.franc(self._amount * multiplier)
