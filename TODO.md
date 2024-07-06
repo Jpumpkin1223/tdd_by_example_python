@@ -11,4 +11,4 @@
 - [ ] Dollar/Franc 중복
 - [x] 공용 equal
 - [ ] 공용 times
-- [ ] 화폐비교
+- [x] 화폐비교

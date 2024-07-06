@@ -9,6 +9,10 @@ class Money(metaclass=ABCMeta):
     def dollar(cls, amount: int) -> "Money":
         return Dollar(amount)
 
+    @classmethod
+    def franc(cls, amount: int) -> "Money":
+        return Franc(amount)
+
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Money):
             return False

@@ -1,4 +1,4 @@
-from models import Franc, Money
+from models import Money
 
 
 def test_dollor_multiplication() -> None:
@@ -8,14 +8,14 @@ def test_dollor_multiplication() -> None:
 
 
 def test_franc_multiplication() -> None:
-    five: Franc = Franc(5)
-    assert Franc(10) == five.times(2)
-    assert Franc(15) == five.times(3)
+    five: Money = Money.franc(5)
+    assert Money.franc(10) == five.times(2)
+    assert Money.franc(15) == five.times(3)
 
 
 def test_equality() -> None:
     assert Money.dollar(5) == Money.dollar(5)
     assert not Money.dollar(5) == Money.dollar(6)
-    assert Franc(5) == Franc(5)
-    assert not Franc(5) == Franc(6)
-    assert not Money.dollar(5) == Franc(5)
+    assert Money.franc(5) == Money.franc(5)
+    assert not Money.franc(5) == Money.franc(6)
+    assert not Money.dollar(5) == Money.franc(5)
