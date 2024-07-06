@@ -11,6 +11,9 @@ class Money:
     def times(self, multiplier: int) -> "Money":
         return Money(self.amount * multiplier, self.currency)
 
+    def plus(self, addend: "Money") -> "Money":
+        return Money(self.amount + addend.amount, self.currency)
+
     @classmethod
     def dollar(self, amount: int) -> "Money":
         return Money(amount, "USD")

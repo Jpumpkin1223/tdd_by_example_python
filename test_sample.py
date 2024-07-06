@@ -19,3 +19,8 @@ def test_equality() -> None:
     assert Money.franc(5) == Money.franc(5)
     assert not Money.franc(5) == Money.franc(6)
     assert not Money.dollar(5) == Money.franc(5)
+
+
+def test_addition() -> None:
+    sum: Money = Money.dollar(5).plus(Money.dollar(5))
+    assert Money.dollar(10) == sum
