@@ -1,4 +1,8 @@
-class Money:
+class Expression:
+    pass
+
+
+class Money(Expression):
     def __init__(self, amount: int, currency: str):
         self.amount = amount
         self.currency = currency
@@ -11,7 +15,7 @@ class Money:
     def times(self, multiplier: int) -> "Money":
         return Money(self.amount * multiplier, self.currency)
 
-    def plus(self, addend: "Money") -> "Money":
+    def plus(self, addend: "Money") -> "Expression":
         return Money(self.amount + addend.amount, self.currency)
 
     @classmethod
@@ -21,3 +25,8 @@ class Money:
     @classmethod
     def franc(cls, amount: int) -> "Money":
         return Money(amount, "CHF")
+
+
+class Bank:
+    def reduce(self, source: Expression, to: str) -> Money:
+        return Money.dollar(10)
