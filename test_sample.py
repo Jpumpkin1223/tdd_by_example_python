@@ -26,3 +26,9 @@ def test_addition() -> None:
     bank: Bank = Bank()
     reduced: Money = bank.reduce(sum, "USD")
     assert Money.dollar(7) == reduced
+
+
+def test_reduce_money() -> None:
+    bank: Bank = Bank()
+    result: Money = bank.reduce(Money.dollar(1), "USD")
+    assert Money.dollar(1) == result
