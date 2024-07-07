@@ -1,4 +1,4 @@
-from models import Bank, Expression, Money
+from models import Bank, Expression, Money, Sum
 
 
 def test_dollor_multiplication() -> None:
@@ -22,10 +22,7 @@ def test_equality() -> None:
 
 
 def test_addition() -> None:
-    # sum: Money = Money.dollar(5).plus(Money.dollar(5))
-    # assert Money.dollar(10) == sum
-    five: Money = Money.dollar(5)
-    sum: Expression = five.plus(five)
+    sum: Expression = Sum(Money.dollar(3), Money.dollar(4))
     bank: Bank = Bank()
     reduced: Money = bank.reduce(sum, "USD")
-    assert Money.dollar(10) == reduced
+    assert Money.dollar(7) == reduced
