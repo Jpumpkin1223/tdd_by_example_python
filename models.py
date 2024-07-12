@@ -6,6 +6,10 @@ class Expression(metaclass=ABCMeta):
     def reduce(self, bank: "Bank", target: str) -> "Money":
         pass
 
+    @abstractmethod
+    def plus(self, addend: "Expression") -> "Expression":
+        pass
+
 
 class Money(Expression):
     def __init__(self, amount: float, currency: str):
@@ -23,6 +27,9 @@ class Money(Expression):
     def reduce(self, bank: "Bank", target: str) -> "Money":
         rate: int = bank.rate(self.currency, target)
         return Money(self.amount / rate, target)
+
+    def plus(self, addend: "Expression") -> "Expression":
+        return Sum(self, addend)
 
     @classmethod
     def dollar(cls, amount: int) -> "Money":
@@ -53,13 +60,17 @@ class Bank:
 
 
 class Sum(Expression):
-    def __init__(self, augend: Money, addend: Money):
+    def __init__(self, augend: Expression, addend: Expression):
         self.augend = augend
         self.addend = addend
 
     def reduce(self, bank: "Bank", target: str) -> Money:
-        amount = self.augend.amount + self.addend.amount
+        amount = self.augend.reduce(bank, target).amount + self.addend.reduce(bank, target).amount
         return Money(amount, target)
+
+    # TODO: implement plus function
+    def plus(self, addend: "Expression") -> None:
+        return None
 
 
 class Pair:
