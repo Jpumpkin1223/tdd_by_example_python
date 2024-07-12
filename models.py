@@ -8,7 +8,7 @@ class Expression(metaclass=ABCMeta):
 
 
 class Money(Expression):
-    def __init__(self, amount: int, currency: str):
+    def __init__(self, amount: float, currency: str):
         self.amount = amount
         self.currency = currency
 
@@ -20,11 +20,8 @@ class Money(Expression):
     def times(self, multiplier: int) -> "Money":
         return Money(self.amount * multiplier, self.currency)
 
-    def plus(self, addend: "Money") -> "Expression":
-        return Sum(self.amount + addend.amount, self.currency)
-
     def reduce(self, bank: "Bank", target: str) -> "Money":
-        rate: bank = bank.rate(self.currency, target)
+        rate: int = bank.rate(self.currency, target)
         return Money(self.amount / rate, target)
 
     @classmethod
@@ -38,7 +35,7 @@ class Money(Expression):
 
 class Bank:
     def __init__(self) -> None:
-        self.__rates: dict = {}
+        self.__rates: dict[Pair, int] = {}
 
     def reduce(self, source: Expression, target: str) -> Money:
         return source.reduce(self, target)
