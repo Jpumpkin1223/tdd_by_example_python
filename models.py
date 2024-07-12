@@ -10,6 +10,10 @@ class Expression(metaclass=ABCMeta):
     def plus(self, addend: "Expression") -> "Expression":
         pass
 
+    @abstractmethod
+    def times(self, multiplier: int) -> "Expression":
+        pass
+
 
 class Money(Expression):
     def __init__(self, amount: float, currency: str):
@@ -21,7 +25,7 @@ class Money(Expression):
             return False
         return self.amount == other.amount and self.currency == other.currency
 
-    def times(self, multiplier: int) -> "Money":
+    def times(self, multiplier: int) -> "Expression":
         return Money(self.amount * multiplier, self.currency)
 
     def reduce(self, bank: "Bank", target: str) -> "Money":
@@ -70,6 +74,9 @@ class Sum(Expression):
 
     def plus(self, addend: Expression) -> "Expression":
         return Sum(self, addend)
+
+    def times(self, multiplier: int) -> "Expression":
+        return Sum(self.augend.times(multiplier), self.addend.times(multiplier))
 
 
 class Pair:

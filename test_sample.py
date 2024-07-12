@@ -62,3 +62,18 @@ def test_sum_plus_money() -> None:
     sum: Expression = Sum(five_bucks, ten_francs).plus(five_bucks)
     result: Money = bank.reduce(sum, "USD")
     assert Money.dollar(15) == result
+
+
+def test_sum_times() -> None:
+    five_bucks: Expression = Money.dollar(5)
+    ten_francs: Expression = Money.franc(10)
+    bank: Bank = Bank()
+    bank.add_rate("CHF", "USD", 2)
+    sum: Expression = Sum(five_bucks, ten_francs).times(2)
+    result: Money = bank.reduce(sum, "USD")
+    assert Money.dollar(20) == result
+
+
+# def test_plus_same_currency_returns_money() -> None:
+#     sum: Expression = Money.dollar(1).plus(Money.dollar(1))
+#     assert isinstance(sum, Money)
