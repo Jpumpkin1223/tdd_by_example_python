@@ -69,8 +69,8 @@ class Sum(Expression):
         return Money(amount, target)
 
     # TODO: implement plus function
-    def plus(self, addend: "Expression") -> None:
-        return None
+    def plus(self, addend: "Expression") -> "Expression":
+        return Expression.plus(self, addend)
 
 
 class Pair:
