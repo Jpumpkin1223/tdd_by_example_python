@@ -59,8 +59,6 @@ def test_sum_plus_money() -> None:
     ten_francs: Expression = Money.franc(10)
     bank: Bank = Bank()
     bank.add_rate("CHF", "USD", 2)
-    sum: Expression = Sum(five_bucks, ten_francs)
-    # sum = Sum(five_bucks, sum)
     sum: Expression = Sum(five_bucks, ten_francs).plus(five_bucks)
     result: Money = bank.reduce(sum, "USD")
     assert Money.dollar(15) == result
