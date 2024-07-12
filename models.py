@@ -28,7 +28,7 @@ class Money(Expression):
         rate: int = bank.rate(self.currency, target)
         return Money(self.amount / rate, target)
 
-    def plus(self, addend: "Expression") -> "Expression":
+    def plus(self, addend: Expression) -> "Expression":
         return Sum(self, addend)
 
     @classmethod
@@ -64,13 +64,12 @@ class Sum(Expression):
         self.augend = augend
         self.addend = addend
 
-    def reduce(self, bank: "Bank", target: str) -> Money:
+    def reduce(self, bank: Bank, target: str) -> Money:
         amount = self.augend.reduce(bank, target).amount + self.addend.reduce(bank, target).amount
         return Money(amount, target)
 
-    # TODO: implement plus function
-    def plus(self, addend: "Expression") -> "Expression":
-        return Expression.plus(self, addend)
+    def plus(self, addend: Expression) -> "Expression":
+        return Sum(self, addend)
 
 
 class Pair:
