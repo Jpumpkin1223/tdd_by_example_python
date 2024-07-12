@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 
 class Expression(metaclass=ABCMeta):
     @abstractmethod
-    def reduce(self, bank: "Bank", target: str) -> "Expression":
+    def reduce(self, bank: "Bank", target: str) -> "Money":
         pass
 
     @abstractmethod
