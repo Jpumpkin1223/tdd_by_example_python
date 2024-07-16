@@ -17,16 +17,14 @@ class TestCase:
 
 class WasRun(TestCase):
     def __init__(self, name: str) -> None:
-        self.was_run = False
         self.log = ""
         super().__init__(name)
 
-    def test_method(self) -> None:
-        self.was_run = True
-        self.log += "testMethod "
-
     def set_up(self) -> None:
         self.log = "setUp "
+
+    def test_method(self) -> None:
+        self.log += "testMethod "
 
     def tear_down(self) -> None:
         self.log += "tearDown "
