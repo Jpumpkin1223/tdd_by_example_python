@@ -5,4 +5,4 @@ class TestCaseTest:
     def test_template_method(self) -> None:
         self.test = WasRun("test_method")
         self.test.run()
-        assert "setUp testMethod " == self.test.log
+        assert "setUp testMethod tearDown " == self.test.log
