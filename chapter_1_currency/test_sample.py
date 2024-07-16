@@ -1,4 +1,4 @@
-from models import Bank, Expression, Money, Sum
+from currency_models import Bank, Expression, Money, Sum
 
 
 def test_dollor_multiplication() -> None:
