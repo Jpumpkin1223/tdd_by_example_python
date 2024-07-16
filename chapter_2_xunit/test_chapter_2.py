@@ -6,3 +6,8 @@ class TestCaseTest:
         test = WasRun("test_method")
         test.run()
         assert "setUp testMethod tearDown " == test.log
+
+    def test_result(self) -> None:
+        test = WasRun("test_method")
+        result = test.run()
+        assert "1 run, 0 failed" == result.summary()

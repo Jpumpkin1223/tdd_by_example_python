@@ -2,11 +2,12 @@ class TestCase:
     def __init__(self, name: str) -> None:
         self.name = name
 
-    def run(self) -> None:
+    def run(self) -> "TestResult":
         self.set_up()
         method = getattr(self, self.name)
         method()
         self.tear_down()
+        return TestResult()
 
     def set_up(self) -> None:
         pass
@@ -28,3 +29,11 @@ class WasRun(TestCase):
 
     def tear_down(self) -> None:
         self.log += "tearDown "
+
+
+class TestResult:
+    def __init__(self) -> None:
+        self.run_count = 1
+
+    def summary(self) -> str:
+        return f"{self.run_count} run, 0 failed"
