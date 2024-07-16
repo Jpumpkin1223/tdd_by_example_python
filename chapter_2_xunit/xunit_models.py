@@ -3,11 +3,13 @@ class TestCase:
         self.name = name
 
     def run(self) -> "TestResult":
+        result = TestResult()
+        result.test_started()
         self.set_up()
         method = getattr(self, self.name)
         method()
         self.tear_down()
-        return TestResult()
+        return result
 
     def set_up(self) -> None:
         pass
@@ -29,6 +31,9 @@ class WasRun(TestCase):
 
     def tear_down(self) -> None:
         self.log += "tearDown "
+
+    def test_broken_method(self) -> None:
+        raise Exception
 
 
 class TestResult:
