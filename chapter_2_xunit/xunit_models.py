@@ -1,9 +1,11 @@
+from typing import List
+
+
 class TestCase:
     def __init__(self, name: str) -> None:
         self.name = name
 
-    def run(self) -> "TestResult":
-        result = TestResult()
+    def run(self, result: "TestResult") -> None:
         result.test_started()
         self.set_up()
         try:
@@ -12,7 +14,6 @@ class TestCase:
         except Exception:
             result.test_failed()
         self.tear_down()
-        return result
 
     def set_up(self) -> None:
         pass
@@ -52,3 +53,15 @@ class TestResult:
 
     def summary(self) -> str:
         return f"{self.run_count} run, {self.failure_count} failed"
+
+
+class TestSuite:
+    def __init__(self) -> None:
+        self.tests: List[TestCase] = []
+
+    def add(self, test: TestCase) -> None:
+        self.tests.append(test)
+
+    def run(self, result: TestResult) -> None:
+        for test in self.tests:
+            test.run(result)

@@ -1,4 +1,4 @@
-from xunit_models import TestResult, WasRun
+from xunit_models import TestResult, TestSuite, WasRun
 
 
 class TestCaseTest:
@@ -22,3 +22,11 @@ class TestCaseTest:
         result.test_started()
         result.test_failed()
         assert "1 run, 1 failed" == result.summary()
+
+    def test_suite(self) -> None:
+        suite = TestSuite()
+        suite.add(WasRun("test_method"))
+        suite.add(WasRun("test_broken_method"))
+        result = TestResult()
+        suite.run(result)
+        assert "2 run, 1 failed" == result.summary()
