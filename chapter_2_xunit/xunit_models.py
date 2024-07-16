@@ -9,8 +9,8 @@ class TestCase:
 
 class WasRun(TestCase):
     def __init__(self, name: str) -> None:
-        self.wasRun = False
+        self.was_run = False
         super().__init__(name)
 
     def test_method(self) -> None:
-        self.wasRun = True
+        self.was_run = True

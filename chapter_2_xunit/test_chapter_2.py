@@ -1,8 +1,11 @@
 from xunit_models import WasRun
 
 
-def testRunning():
+def test_running():
     test = WasRun("test_method")
-    assert not test.wasRun
+    assert not test.was_run
     test.run()
-    assert test.wasRun
+    assert test.was_run
+
+
+# def test
